@@ -26,7 +26,7 @@ app.post("/ins", async (req, res) => {
 app.put("/ins/:id", async (req, res) => {
   const { id } = req.params;
   const { name, image, description, quantity, code } = req.body;
-  await Product.findOneAndUpdate(id, {
+  await Product.findByIdAndUpdate(id, {
     name,
     image,
     description,
@@ -34,7 +34,13 @@ app.put("/ins/:id", async (req, res) => {
     code,
   });
 
-  res.status(204);
+  res.sendStatus(204);
+});
+app.delete("/ins/:id", async (req, res) => {
+  const { id } = req.params;
+  await Product.findByIdAndDelete(id);
+
+  res.sendStatus(204);
 });
 
 app.listen(port, () => console.log(`🚀 Meu site http://localhost:${port}`));

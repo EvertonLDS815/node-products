@@ -23,5 +23,18 @@ app.post("/ins", async (req, res) => {
 
   res.status(201).json(newPort);
 });
+app.put("/ins/:id", async (req, res) => {
+  const { id } = req.params;
+  const { name, image, description, quantity, code } = req.body;
+  await Product.findOneAndUpdate(id, {
+    name,
+    image,
+    description,
+    quantity,
+    code,
+  });
+
+  res.status(204);
+});
 
 app.listen(port, () => console.log(`🚀 Meu site http://localhost:${port}`));
